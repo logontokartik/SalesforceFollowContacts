@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Following__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Following</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Persona__c</fullName>
+        <externalId>false</externalId>
+        <label>Persona</label>
+        <length>80</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <webLinks>
+        <fullName>Follow</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Follow on Twitter</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/25.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/25.0/apex.js&quot;)}
+
+var persona = &quot;{!Contact.Persona__c}&quot;;
+
+if(persona == null || persona == &quot;&quot;){
+
+   alert(&apos;No Twitter Persona available&apos;);
+
+}else {
+
+var follow = &quot;{!Contact.Following__c}&quot;;
+
+if(follow == &apos;1&apos;){
+
+   alert(&apos;Already Following&apos;);
+
+}else {
+
+sforce.apex.execute(&quot;TwitterManager&quot;,&quot;followUser&quot;,{conId:&quot;{!Contact.Id}&quot;});
+location.reload(true);
+
+}
+
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Follow_on_Twitter</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Follow on Twitter</masterLabel>
+        <openType>sidebar</openType>
+        <page>TwitterFollows</page>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+    </webLinks>
+</CustomObject>

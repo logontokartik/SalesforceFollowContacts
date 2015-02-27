@@ -1,0 +1,56 @@
+<apex:page controller="AuthorizeTwitter" action="{!saveTokens}">
+    <apex:form id="theForm">
+    	<apex:pageBlock id="sBlock" title="Twitter Config Settings" rendered="{!settingsPresent}">
+    	<apex:pageBlockSection >
+    		<apex:pageBlockSectionItem >
+    			<apex:outputLabel value="Config Name"/>
+    			<apex:outputField value="{!setting.Name}"/>
+    		</apex:pageBlockSectionItem>
+    		<apex:pageBlockSectionItem >
+    			<apex:outputLabel value="Consumer Key"/>
+    			<apex:outputField value="{!setting.ConsumerKey__c}"/>
+    		</apex:pageBlockSectionItem>
+    		<apex:pageBlockSectionItem >
+    			<apex:outputLabel value="Consumer Secret"/>
+    			<apex:outputField value="{!setting.ConsumerSecret__c}"/>
+    		</apex:pageBlockSectionItem>
+    		<apex:pageBlockSectionItem >
+    			<apex:outputLabel value="Access Token"/>
+    			<apex:outputField value="{!setting.OAuthToken__c}"/>
+    		</apex:pageBlockSectionItem>
+    		<apex:pageBlockSectionItem >
+    			<apex:outputLabel value="Access Token Secret"/>
+    			<apex:outputField value="{!setting.OauthTokenSecret__c}"/>
+    		</apex:pageBlockSectionItem>
+    		<apex:pageBlockSectionItem >
+    			<apex:outputLabel value="Twitter User"/>
+    			<apex:outputField value="{!setting.ScreenName__c}"/>
+    		</apex:pageBlockSectionItem>
+    	
+    	</apex:pageBlockSection>
+    	<apex:pageBlockbuttons location="top">
+    		<apex:commandButton value="Authorize Twitter" action="{!authorize}"/>
+    	</apex:pageBlockbuttons>
+    	</apex:pageBlock>
+    	<apex:pageBlock id="eBlock" title="Enter Initial Settings" rendered="{!NOT(settingsPresent)}">
+    		<apex:pageBlockSection >
+    		<apex:pageBlockSectionItem >
+    			<apex:outputLabel value="Enter Config Name"/>
+    			<apex:inputField value="{!setting.Name}"/>
+    		</apex:pageBlockSectionItem>
+    		<apex:pageBlockSectionItem >
+    			<apex:outputLabel value="Enter Consumer Key (If you have one)"/>
+    			<apex:inputField value="{!setting.ConsumerKey__c}"/>
+    		</apex:pageBlockSectionItem>
+    		<apex:pageBlockSectionItem >
+    			<apex:outputLabel value="Enter Consumer Secret (If you have one)"/>
+    			<apex:inputField value="{!setting.ConsumerSecret__c}"/>
+    		</apex:pageBlockSectionItem>
+    	</apex:pageBlockSection>
+    		<apex:pageBlockbuttons location="top">
+    		<apex:commandButton value="Save Config" action="{!saveConfigs}"/>
+    	</apex:pageBlockbuttons>
+    
+    	</apex:pageBlock>
+    </apex:form>
+</apex:page>

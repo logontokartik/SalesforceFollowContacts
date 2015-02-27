@@ -1,0 +1,31 @@
+<apex:page standardController="Contact" recordSetVar="contacts" extensions="TwitterFollowsExt" action="{!follow}">
+	<apex:sectionHeader title="Contacts" subTitle="Follow on Twitter"/>
+	<apex:form id="theForm">
+		<apex:pageMessages id="theMessages"/>
+		<apex:pageBlock id="nFollowing" title="New Following">
+			<apex:outputText value="No New Following" rendered="{!nFollowers.size = 0}"/>
+			<apex:pageBlocktable value="{!nFollowers}" var="n" rendered="{!nFollowers.size > 0}">
+				<apex:column value="{!n.Name}"/>
+				<apex:column value="{!n.Persona__c}"/>
+		</apex:pageBlocktable>
+		<apex:pageBlockButtons location="top">
+			<apex:commandButton value="Close" action="{!cancel}"/>
+		</apex:pageBlockButtons>
+		</apex:pageBlock>
+		
+		<apex:pageBlock id="eFollowing" title="Already Following">
+			<apex:outputText value="No existing Following" rendered="{!eFollowers.size = 0}"/>	
+			<apex:pageBlocktable value="{!eFollowers}" var="e" rendered="{!eFollowers.size > 0}">
+				<apex:column value="{!e.Name}"/>
+				<apex:column value="{!e.Persona__c}"/>
+			</apex:pageBlocktable>
+		</apex:pageBlock>
+		
+		<apex:pageBlock id="noneBlock" title="Contacts with No Twitter Persona">
+			<apex:outputText value="None in Selected" rendered="{!nContacts.size = 0}"/>	
+			<apex:pageBlocktable value="{!nContacts}" var="n" rendered="{!nContacts.size > 0}">
+				<apex:column value="{!n.Name}"/>
+			</apex:pageBlocktable>
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>
